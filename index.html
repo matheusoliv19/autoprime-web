@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AutoPrime - Sua Concessionária Online</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <header class="navbar" id="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="logo">
+        <i class="fas fa-car"></i> AutoPrime
+      </a>
+      <nav class="nav-links" id="navLinks">
+        <a href="index.html" class="active">Início</a>
+        <a href="catalogo.html">Catálogo</a>
+        <a href="contato.html">Contato</a>
+        <a href="#sobre">Sobre Nós</a>
+      </nav>
+      <div class="nav-actions">
+        <a href="catalogo.html" class="btn btn-primary">Ver Carros</a>
+        <button class="hamburger" id="hamburger" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-slider" id="heroSlider">
+      <div class="hero-slide active" style="background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);">
+        <div class="container hero-content">
+          <span class="hero-tag">Novo em estoque</span>
+          <h1>Encontre o carro <span class="highlight">dos seus sonhos</span></h1>
+          <p>Mais de 200 veículos selecionados com garantia e procedência. Financiamento facilitado e entrega em todo Brasil.</p>
+          <div class="hero-btns">
+            <a href="catalogo.html" class="btn btn-primary btn-lg">Explorar Catálogo</a>
+            <a href="contato.html" class="btn btn-outline btn-lg">Falar com Consultor</a>
+          </div>
+          <div class="hero-stats">
+            <div class="stat"><strong>200+</strong><span>Veículos</span></div>
+            <div class="stat"><strong>5k+</strong><span>Clientes</span></div>
+            <div class="stat"><strong>15</strong><span>Anos de mercado</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BUSCA RÁPIDA -->
+  <section class="quick-search">
+    <div class="container">
+      <div class="search-card">
+        <h2><i class="fas fa-search"></i> Busca Rápida</h2>
+        <form class="search-form" id="quickSearchForm">
+          <div class="search-field">
+            <label>Marca</label>
+            <select id="searchMarca">
+              <option value="">Todas as marcas</option>
+              <option value="Toyota">Toyota</option>
+              <option value="Volkswagen">Volkswagen</option>
+              <option value="Chevrolet">Chevrolet</option>
+              <option value="Ford">Ford</option>
+              <option value="Honda">Honda</option>
+              <option value="Hyundai">Hyundai</option>
+              <option value="BMW">BMW</option>
+              <option value="Mercedes">Mercedes-Benz</option>
+              <option value="Audi">Audi</option>
+            </select>
+          </div>
+          <div class="search-field">
+            <label>Preço até</label>
+            <select id="searchPreco">
+              <option value="">Qualquer preço</option>
+              <option value="50000">R$ 50.000</option>
+              <option value="80000">R$ 80.000</option>
+              <option value="120000">R$ 120.000</option>
+              <option value="200000">R$ 200.000</option>
+              <option value="999999">Acima de R$ 200.000</option>
+            </select>
+          </div>
+          <div class="search-field">
+            <label>Ano a partir de</label>
+            <select id="searchAno">
+              <option value="">Qualquer ano</option>
+              <option value="2024">2024</option>
+              <option value="2023">2023</option>
+              <option value="2022">2022</option>
+              <option value="2020">2020</option>
+              <option value="2018">2018</option>
+            </select>
+          </div>
+          <div class="search-field">
+            <label>Tipo</label>
+            <select id="searchTipo">
+              <option value="">Todos os tipos</option>
+              <option value="SUV">SUV</option>
+              <option value="Sedan">Sedan</option>
+              <option value="Hatch">Hatch</option>
+              <option value="Picape">Picape</option>
+              <option value="Esportivo">Esportivo</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-primary btn-search">
+            <i class="fas fa-search"></i> Buscar
+          </button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- DESTAQUES -->
+  <section class="section" id="destaques">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Mais procurados</span>
+        <h2>Veículos em <span class="highlight">Destaque</span></h2>
+        <p>Selecionamos os melhores veículos para você. Qualidade, procedência e preço justo.</p>
+      </div>
+      <div class="cars-grid" id="featuredCars"></div>
+      <div class="section-footer">
+        <a href="catalogo.html" class="btn btn-outline btn-lg">Ver todos os veículos <i class="fas fa-arrow-right"></i></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CATEGORIAS -->
+  <section class="section categories-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Navegue por tipo</span>
+        <h2>Categorias</h2>
+      </div>
+      <div class="categories-grid">
+        <a href="catalogo.html?tipo=SUV" class="category-card">
+          <div class="category-icon"><i class="fas fa-truck-pickup"></i></div>
+          <span>SUV</span>
+          <small>Espaço e conforto</small>
+        </a>
+        <a href="catalogo.html?tipo=Sedan" class="category-card">
+          <div class="category-icon"><i class="fas fa-car-side"></i></div>
+          <span>Sedan</span>
+          <small>Elegância e espaço</small>
+        </a>
+        <a href="catalogo.html?tipo=Hatch" class="category-card">
+          <div class="category-icon"><i class="fas fa-car"></i></div>
+          <span>Hatch</span>
+          <small>Ágil e econômico</small>
+        </a>
+        <a href="catalogo.html?tipo=Picape" class="category-card">
+          <div class="category-icon"><i class="fas fa-truck"></i></div>
+          <span>Picape</span>
+          <small>Força e versatilidade</small>
+        </a>
+        <a href="catalogo.html?tipo=Esportivo" class="category-card">
+          <div class="category-icon"><i class="fas fa-gauge-high"></i></div>
+          <span>Esportivo</span>
+          <small>Adrenalina pura</small>
+        </a>
+        <a href="catalogo.html?tipo=Eletrico" class="category-card">
+          <div class="category-icon"><i class="fas fa-bolt"></i></div>
+          <span>Elétrico</span>
+          <small>O futuro chegou</small>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- POR QUÊ NÓS -->
+  <section class="section why-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Nossos diferenciais</span>
+        <h2>Por que escolher a <span class="highlight">AutoPrime</span>?</h2>
+      </div>
+      <div class="why-grid">
+        <div class="why-card">
+          <div class="why-icon"><i class="fas fa-shield-halved"></i></div>
+          <h3>Garantia Total</h3>
+          <p>Todos os veículos passam por inspeção completa de 120 pontos e vêm com garantia de 1 ano.</p>
+        </div>
+        <div class="why-card">
+          <div class="why-icon"><i class="fas fa-hand-holding-dollar"></i></div>
+          <h3>Financiamento Fácil</h3>
+          <p>Parcelas que cabem no seu bolso. Aprovação em minutos com as melhores taxas do mercado.</p>
+        </div>
+        <div class="why-card">
+          <div class="why-icon"><i class="fas fa-rotate-left"></i></div>
+          <h3>Troca e Consignação</h3>
+          <p>Use seu veículo atual como parte do pagamento. Avaliação gratuita e sem compromisso.</p>
+        </div>
+        <div class="why-card">
+          <div class="why-icon"><i class="fas fa-truck-fast"></i></div>
+          <h3>Entrega em Todo Brasil</h3>
+          <p>Compramos de onde você estiver. Entregamos com segurança até a sua porta.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DEPOIMENTOS -->
+  <section class="section testimonials-section">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">O que dizem nossos clientes</span>
+        <h2>Depoimentos</h2>
+      </div>
+      <div class="testimonials-grid">
+        <div class="testimonial-card">
+          <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+          <p>"Experiência incrível! Comprei meu Corolla sem sair de casa. Tudo muito transparente e rápido."</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">MR</div>
+            <div><strong>Marcos Ribeiro</strong><small>São Paulo, SP</small></div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+          <p>"Ótimo atendimento! Fiz a troca do meu carro antigo e fiquei muito satisfeita com a avaliação."</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">AS</div>
+            <div><strong>Ana Silva</strong><small>Curitiba, PR</small></div>
+          </div>
+        </div>
+        <div class="testimonial-card">
+          <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-stroke"></i></div>
+          <p>"Financiamento aprovado na hora! Saí com o carro no mesmo dia. Recomendo muito a AutoPrime."</p>
+          <div class="testimonial-author">
+            <div class="author-avatar">JC</div>
+            <div><strong>João Costa</strong><small>Florianópolis, SC</small></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOBRE -->
+  <section class="section about-section" id="sobre">
+    <div class="container about-container">
+      <div class="about-text">
+        <span class="section-tag">Nossa história</span>
+        <h2>15 anos conectando <span class="highlight">pessoas a carros</span></h2>
+        <p>A AutoPrime nasceu em 2009 com a missão de tornar a compra de veículos mais simples, transparente e acessível. Ao longo dos anos, ajudamos mais de 5.000 famílias a realizarem o sonho do carro novo.</p>
+        <p>Nossa equipe de especialistas está sempre pronta para encontrar o veículo ideal para o seu perfil e orçamento, com todo suporte necessário do início ao fim.</p>
+        <div class="about-features">
+          <div><i class="fas fa-check-circle"></i> Revistoria completa de 120 pontos</div>
+          <div><i class="fas fa-check-circle"></i> Documentação 100% regularizada</div>
+          <div><i class="fas fa-check-circle"></i> Suporte pós-venda vitalício</div>
+          <div><i class="fas fa-check-circle"></i> Parceria com os maiores bancos</div>
+        </div>
+        <a href="contato.html" class="btn btn-primary">Fale com a gente</a>
+      </div>
+      <div class="about-image">
+        <div class="about-img-placeholder">
+          <i class="fas fa-building"></i>
+          <span>AutoPrime Motors</span>
+          <small>Desde 2009</small>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NEWSLETTER -->
+  <section class="newsletter-section">
+    <div class="container newsletter-container">
+      <div class="newsletter-text">
+        <h2><i class="fas fa-bell"></i> Receba novidades em primeira mão</h2>
+        <p>Cadastre-se e seja o primeiro a saber quando novos veículos chegarem ao estoque.</p>
+      </div>
+      <form class="newsletter-form" id="newsletterForm">
+        <input type="email" placeholder="Seu melhor e-mail" required />
+        <button type="submit" class="btn btn-primary">Cadastrar</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="logo"><i class="fas fa-car"></i> AutoPrime</a>
+        <p>Sua concessionária de confiança. Qualidade, transparência e os melhores preços do mercado.</p>
+        <div class="social-links">
+          <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+          <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+          <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+        </div>
+      </div>
+      <div class="footer-links">
+        <h4>Navegação</h4>
+        <ul>
+          <li><a href="index.html">Início</a></li>
+          <li><a href="catalogo.html">Catálogo</a></li>
+          <li><a href="contato.html">Contato</a></li>
+          <li><a href="#sobre">Sobre Nós</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <h4>Categorias</h4>
+        <ul>
+          <li><a href="catalogo.html?tipo=SUV">SUV</a></li>
+          <li><a href="catalogo.html?tipo=Sedan">Sedan</a></li>
+          <li><a href="catalogo.html?tipo=Hatch">Hatch</a></li>
+          <li><a href="catalogo.html?tipo=Picape">Picape</a></li>
+          <li><a href="catalogo.html?tipo=Esportivo">Esportivo</a></li>
+        </ul>
+      </div>
+      <div class="footer-contact">
+        <h4>Contato</h4>
+        <ul>
+          <li><i class="fas fa-map-marker-alt"></i> Av. Principal, 1234 - Centro</li>
+          <li><i class="fas fa-phone"></i> (48) 3333-4444</li>
+          <li><i class="fab fa-whatsapp"></i> (48) 99999-8888</li>
+          <li><i class="fas fa-envelope"></i> contato@autoprime.com.br</li>
+          <li><i class="fas fa-clock"></i> Seg-Sáb: 8h às 18h</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">
+        <p>&copy; 2026 AutoPrime Motors. Todos os direitos reservados.</p>
+        <p>CNPJ: 00.000.000/0001-00</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- BOTÃO WHATSAPP FLUTUANTE -->
+  <a href="https://wa.me/5548999998888" class="whatsapp-float" target="_blank" aria-label="WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+
+  <!-- BOTÃO VOLTAR AO TOPO -->
+  <button class="scroll-top" id="scrollTop" aria-label="Voltar ao topo">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+  <script src="js/dados.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

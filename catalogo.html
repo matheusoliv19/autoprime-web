@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Catálogo de Veículos - AutoPrime</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/catalogo.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <header class="navbar" id="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="logo">
+        <i class="fas fa-car"></i> AutoPrime
+      </a>
+      <nav class="nav-links" id="navLinks">
+        <a href="index.html">Início</a>
+        <a href="catalogo.html" class="active">Catálogo</a>
+        <a href="contato.html">Contato</a>
+        <a href="index.html#sobre">Sobre Nós</a>
+      </nav>
+      <div class="nav-actions">
+        <a href="contato.html" class="btn btn-primary">Falar com Consultor</a>
+        <button class="hamburger" id="hamburger" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- PAGE HEADER -->
+  <section class="page-header">
+    <div class="container">
+      <h1><i class="fas fa-car"></i> Catálogo de Veículos</h1>
+      <p>Encontre o carro ideal para você entre nossos mais de 200 veículos selecionados</p>
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a href="index.html">Início</a>
+        <i class="fas fa-chevron-right"></i>
+        <span>Catálogo</span>
+      </nav>
+    </div>
+  </section>
+
+  <!-- CONTEÚDO PRINCIPAL -->
+  <div class="catalog-layout container">
+
+    <!-- SIDEBAR FILTROS -->
+    <aside class="filters-sidebar" id="filtersSidebar">
+      <div class="filters-header">
+        <h3><i class="fas fa-sliders-h"></i> Filtros</h3>
+        <button class="btn-clear-filters" id="clearFilters">
+          <i class="fas fa-times"></i> Limpar
+        </button>
+      </div>
+
+      <!-- Busca por texto -->
+      <div class="filter-group">
+        <label>Buscar</label>
+        <div class="search-input-wrap">
+          <input type="text" id="searchText" placeholder="Marca, modelo..." />
+          <i class="fas fa-search"></i>
+        </div>
+      </div>
+
+      <!-- Marca -->
+      <div class="filter-group">
+        <label>Marca</label>
+        <div class="checkbox-list" id="filterMarca">
+          <label class="checkbox-item"><input type="checkbox" value="Toyota" /> Toyota</label>
+          <label class="checkbox-item"><input type="checkbox" value="Volkswagen" /> Volkswagen</label>
+          <label class="checkbox-item"><input type="checkbox" value="Chevrolet" /> Chevrolet</label>
+          <label class="checkbox-item"><input type="checkbox" value="Ford" /> Ford</label>
+          <label class="checkbox-item"><input type="checkbox" value="Honda" /> Honda</label>
+          <label class="checkbox-item"><input type="checkbox" value="Hyundai" /> Hyundai</label>
+          <label class="checkbox-item"><input type="checkbox" value="BMW" /> BMW</label>
+          <label class="checkbox-item"><input type="checkbox" value="Mercedes" /> Mercedes-Benz</label>
+          <label class="checkbox-item"><input type="checkbox" value="Audi" /> Audi</label>
+          <label class="checkbox-item"><input type="checkbox" value="Fiat" /> Fiat</label>
+        </div>
+      </div>
+
+      <!-- Tipo -->
+      <div class="filter-group">
+        <label>Tipo</label>
+        <div class="checkbox-list" id="filterTipo">
+          <label class="checkbox-item"><input type="checkbox" value="SUV" /> SUV</label>
+          <label class="checkbox-item"><input type="checkbox" value="Sedan" /> Sedan</label>
+          <label class="checkbox-item"><input type="checkbox" value="Hatch" /> Hatch</label>
+          <label class="checkbox-item"><input type="checkbox" value="Picape" /> Picape</label>
+          <label class="checkbox-item"><input type="checkbox" value="Esportivo" /> Esportivo</label>
+          <label class="checkbox-item"><input type="checkbox" value="Eletrico" /> Elétrico</label>
+        </div>
+      </div>
+
+      <!-- Faixa de Preço -->
+      <div class="filter-group">
+        <label>Preço Máximo: <strong id="precoLabel">R$ 500.000</strong></label>
+        <input type="range" id="filterPreco" min="20000" max="500000" step="5000" value="500000" class="range-input" />
+        <div class="range-limits">
+          <span>R$ 20.000</span>
+          <span>R$ 500.000</span>
+        </div>
+      </div>
+
+      <!-- Ano -->
+      <div class="filter-group">
+        <label>Ano</label>
+        <div class="range-inputs-double">
+          <select id="filterAnoMin">
+            <option value="2015">2015</option>
+            <option value="2016">2016</option>
+            <option value="2017">2017</option>
+            <option value="2018">2018</option>
+            <option value="2019">2019</option>
+            <option value="2020">2020</option>
+            <option value="2021">2021</option>
+            <option value="2022">2022</option>
+            <option value="2023">2023</option>
+            <option value="2024">2024</option>
+          </select>
+          <span>até</span>
+          <select id="filterAnoMax">
+            <option value="2024" selected>2024</option>
+            <option value="2023">2023</option>
+            <option value="2022">2022</option>
+            <option value="2021">2021</option>
+            <option value="2020">2020</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Combustível -->
+      <div class="filter-group">
+        <label>Combustível</label>
+        <div class="checkbox-list" id="filterCombustivel">
+          <label class="checkbox-item"><input type="checkbox" value="Flex" /> Flex</label>
+          <label class="checkbox-item"><input type="checkbox" value="Gasolina" /> Gasolina</label>
+          <label class="checkbox-item"><input type="checkbox" value="Diesel" /> Diesel</label>
+          <label class="checkbox-item"><input type="checkbox" value="Elétrico" /> Elétrico</label>
+          <label class="checkbox-item"><input type="checkbox" value="Híbrido" /> Híbrido</label>
+        </div>
+      </div>
+
+      <!-- Câmbio -->
+      <div class="filter-group">
+        <label>Câmbio</label>
+        <div class="checkbox-list" id="filterCambio">
+          <label class="checkbox-item"><input type="checkbox" value="Automático" /> Automático</label>
+          <label class="checkbox-item"><input type="checkbox" value="Manual" /> Manual</label>
+          <label class="checkbox-item"><input type="checkbox" value="CVT" /> CVT</label>
+        </div>
+      </div>
+
+      <button class="btn btn-primary btn-block" id="applyFilters">
+        <i class="fas fa-filter"></i> Aplicar Filtros
+      </button>
+    </aside>
+
+    <!-- ÁREA PRINCIPAL -->
+    <main class="catalog-main">
+      <!-- Barra de controles -->
+      <div class="catalog-controls">
+        <div class="results-info">
+          <span id="resultsCount">0 veículos encontrados</span>
+        </div>
+        <div class="controls-right">
+          <button class="btn-filter-mobile" id="btnFilterMobile">
+            <i class="fas fa-sliders-h"></i> Filtros
+          </button>
+          <div class="sort-wrap">
+            <label><i class="fas fa-sort"></i></label>
+            <select id="sortSelect">
+              <option value="relevancia">Relevância</option>
+              <option value="preco-asc">Menor preço</option>
+              <option value="preco-desc">Maior preço</option>
+              <option value="ano-desc">Mais recente</option>
+              <option value="ano-asc">Mais antigo</option>
+              <option value="km-asc">Menor KM</option>
+            </select>
+          </div>
+          <div class="view-toggle">
+            <button class="view-btn active" id="viewGrid" title="Grade">
+              <i class="fas fa-th"></i>
+            </button>
+            <button class="view-btn" id="viewList" title="Lista">
+              <i class="fas fa-list"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tags de filtros ativos -->
+      <div class="active-filters" id="activeFilters"></div>
+
+      <!-- Grid de carros -->
+      <div class="cars-grid catalog-grid" id="catalogGrid"></div>
+
+      <!-- Estado vazio -->
+      <div class="empty-state" id="emptyState" style="display:none;">
+        <i class="fas fa-car-crash"></i>
+        <h3>Nenhum veículo encontrado</h3>
+        <p>Tente ajustar os filtros para encontrar mais opções.</p>
+        <button class="btn btn-primary" id="resetFilters">Limpar Filtros</button>
+      </div>
+
+      <!-- Paginação -->
+      <div class="pagination" id="pagination"></div>
+    </main>
+  </div>
+
+  <!-- OVERLAY MOBILE -->
+  <div class="filters-overlay" id="filtersOverlay"></div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="logo"><i class="fas fa-car"></i> AutoPrime</a>
+        <p>Sua concessionária de confiança.</p>
+        <div class="social-links">
+          <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+          <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+        </div>
+      </div>
+      <div class="footer-links">
+        <h4>Navegação</h4>
+        <ul>
+          <li><a href="index.html">Início</a></li>
+          <li><a href="catalogo.html">Catálogo</a></li>
+          <li><a href="contato.html">Contato</a></li>
+        </ul>
+      </div>
+      <div class="footer-contact">
+        <h4>Contato</h4>
+        <ul>
+          <li><i class="fas fa-phone"></i> (48) 3333-4444</li>
+          <li><i class="fab fa-whatsapp"></i> (48) 99999-8888</li>
+          <li><i class="fas fa-envelope"></i> contato@autoprime.com.br</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">
+        <p>&copy; 2026 AutoPrime Motors. Todos os direitos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+  <a href="https://wa.me/5548999998888" class="whatsapp-float" target="_blank" aria-label="WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+  <button class="scroll-top" id="scrollTop" aria-label="Voltar ao topo">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+  <script src="js/dados.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/catalogo.js"></script>
+</body>
+</html>

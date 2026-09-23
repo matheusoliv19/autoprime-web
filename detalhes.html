@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Detalhes do Veículo - AutoPrime</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <header class="navbar" id="navbar">
+    <div class="container nav-container">
+      <a href="index.html" class="logo">
+        <i class="fas fa-car"></i> AutoPrime
+      </a>
+      <nav class="nav-links" id="navLinks">
+        <a href="index.html">Início</a>
+        <a href="catalogo.html" class="active">Catálogo</a>
+        <a href="contato.html">Contato</a>
+        <a href="index.html#sobre">Sobre Nós</a>
+      </nav>
+      <div class="nav-actions">
+        <a href="contato.html" class="btn btn-primary">Falar com Consultor</a>
+        <button class="hamburger" id="hamburger" aria-label="Menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- CONTEÚDO DETALHES -->
+  <div class="details-page container" id="detailsPage">
+    <!-- Breadcrumb -->
+    <nav class="breadcrumb details-breadcrumb" aria-label="Breadcrumb">
+      <a href="index.html">Início</a>
+      <i class="fas fa-chevron-right"></i>
+      <a href="catalogo.html">Catálogo</a>
+      <i class="fas fa-chevron-right"></i>
+      <span id="breadcrumbCar">Veículo</span>
+    </nav>
+
+    <!-- Layout principal -->
+    <div class="details-layout">
+
+      <!-- GALERIA -->
+      <div class="details-gallery">
+        <div class="gallery-main">
+          <img src="" alt="Foto principal do veículo" id="mainPhoto" />
+          <div class="gallery-badge" id="galleryBadge"></div>
+        </div>
+        <div class="gallery-thumbs" id="galleryThumbs"></div>
+      </div>
+
+      <!-- INFO DIREITA -->
+      <div class="details-info">
+        <div class="car-badges" id="carBadges"></div>
+        <h1 class="car-title" id="carTitle">Carregando...</h1>
+        <div class="car-subtitle" id="carSubtitle"></div>
+
+        <div class="car-price-block">
+          <div class="price-main" id="carPrice"></div>
+          <div class="price-parcel" id="carParcel"></div>
+        </div>
+
+        <!-- Specs rápidos -->
+        <div class="quick-specs" id="quickSpecs"></div>
+
+        <!-- Ações -->
+        <div class="details-actions">
+          <a href="#simulador" class="btn btn-primary btn-lg">
+            <i class="fas fa-calculator"></i> Simular Financiamento
+          </a>
+          <a href="contato.html" class="btn btn-success btn-lg" id="whatsappBtn">
+            <i class="fab fa-whatsapp"></i> Tenho Interesse
+          </a>
+        </div>
+
+        <!-- Infos adicionais -->
+        <div class="details-meta">
+          <div class="meta-item"><i class="fas fa-shield-halved"></i><span>Garantia de 1 ano</span></div>
+          <div class="meta-item"><i class="fas fa-file-contract"></i><span>Documentação inclusa</span></div>
+          <div class="meta-item"><i class="fas fa-rotate-left"></i><span>Aceita troca</span></div>
+          <div class="meta-item"><i class="fas fa-truck-fast"></i><span>Entrega em todo Brasil</span></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TABS DE INFORMAÇÕES -->
+    <div class="details-tabs">
+      <div class="tabs-header">
+        <button class="tab-btn active" data-tab="especificacoes">
+          <i class="fas fa-list-check"></i> Especificações
+        </button>
+        <button class="tab-btn" data-tab="opcionais">
+          <i class="fas fa-star"></i> Opcionais
+        </button>
+        <button class="tab-btn" data-tab="simulador">
+          <i class="fas fa-calculator"></i> Financiamento
+        </button>
+      </div>
+
+      <!-- TAB: Especificações -->
+      <div class="tab-content active" id="tab-especificacoes">
+        <div class="specs-grid" id="specsGrid"></div>
+      </div>
+
+      <!-- TAB: Opcionais -->
+      <div class="tab-content" id="tab-opcionais">
+        <div class="opcionais-grid" id="opcionaisGrid"></div>
+      </div>
+
+      <!-- TAB: Simulador -->
+      <div class="tab-content" id="tab-simulador" id="simulador">
+        <div class="simulator-layout">
+          <div class="simulator-form">
+            <h3><i class="fas fa-calculator"></i> Simulador de Financiamento</h3>
+            <p>Calcule as parcelas do seu financiamento de forma simples e rápida.</p>
+
+            <div class="sim-field">
+              <label>Valor do Veículo</label>
+              <input type="text" id="simValorVeiculo" readonly />
+            </div>
+            <div class="sim-field">
+              <label>Valor de Entrada</label>
+              <input type="number" id="simEntrada" placeholder="0" min="0" />
+              <small id="simEntradaPercent"></small>
+            </div>
+            <div class="sim-field">
+              <label>Número de Parcelas</label>
+              <select id="simParcelas">
+                <option value="12">12x</option>
+                <option value="24">24x</option>
+                <option value="36" selected>36x</option>
+                <option value="48">48x</option>
+                <option value="60">60x</option>
+                <option value="72">72x</option>
+              </select>
+            </div>
+            <div class="sim-field">
+              <label>Taxa de Juros Mensal (%)</label>
+              <select id="simTaxa">
+                <option value="0.89">0,89% a.m. (CDC Banco)</option>
+                <option value="1.19" selected>1,19% a.m. (Financeira)</option>
+                <option value="1.49">1,49% a.m. (Consórcio)</option>
+                <option value="0">0% (À vista)</option>
+              </select>
+            </div>
+            <button class="btn btn-primary btn-block" id="simCalcular">
+              <i class="fas fa-calculator"></i> Calcular
+            </button>
+          </div>
+
+          <div class="simulator-result" id="simResult">
+            <h3>Resultado da Simulação</h3>
+            <div class="sim-result-cards">
+              <div class="sim-result-card">
+                <span>Valor financiado</span>
+                <strong id="resFinanciado">-</strong>
+              </div>
+              <div class="sim-result-card highlight">
+                <span>Parcela mensal</span>
+                <strong id="resParcela">-</strong>
+              </div>
+              <div class="sim-result-card">
+                <span>Total a pagar</span>
+                <strong id="resTotal">-</strong>
+              </div>
+              <div class="sim-result-card">
+                <span>Juros totais</span>
+                <strong id="resJuros">-</strong>
+              </div>
+            </div>
+            <p class="sim-disclaimer">* Simulação meramente ilustrativa. Condições sujeitas a análise de crédito.</p>
+            <a href="contato.html" class="btn btn-success btn-block">
+              <i class="fab fa-whatsapp"></i> Solicitar Proposta Oficial
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- VEÍCULOS RELACIONADOS -->
+    <section class="related-section">
+      <h2>Veículos Relacionados</h2>
+      <div class="cars-grid" id="relatedCars"></div>
+    </section>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <a href="index.html" class="logo"><i class="fas fa-car"></i> AutoPrime</a>
+        <p>Sua concessionária de confiança.</p>
+        <div class="social-links">
+          <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          <a href="#" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+          <a href="#" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+        </div>
+      </div>
+      <div class="footer-links">
+        <h4>Navegação</h4>
+        <ul>
+          <li><a href="index.html">Início</a></li>
+          <li><a href="catalogo.html">Catálogo</a></li>
+          <li><a href="contato.html">Contato</a></li>
+        </ul>
+      </div>
+      <div class="footer-contact">
+        <h4>Contato</h4>
+        <ul>
+          <li><i class="fas fa-phone"></i> (48) 3333-4444</li>
+          <li><i class="fab fa-whatsapp"></i> (48) 99999-8888</li>
+          <li><i class="fas fa-envelope"></i> contato@autoprime.com.br</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="container">
+        <p>&copy; 2026 AutoPrime Motors. Todos os direitos reservados.</p>
+      </div>
+    </div>
+  </footer>
+
+  <a href="https://wa.me/5548999998888" class="whatsapp-float" target="_blank" aria-label="WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+  <button class="scroll-top" id="scrollTop" aria-label="Voltar ao topo">
+    <i class="fas fa-chevron-up"></i>
+  </button>
+
+  <script src="js/dados.js"></script>
+  <script src="js/main.js"></script>
+  <script src="js/detalhes.js"></script>
+</body>
+</html>
