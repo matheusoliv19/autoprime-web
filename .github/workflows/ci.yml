@@ -1,0 +1,95 @@
+name: CI — Integração Contínua
+
+on:
+  pull_request:
+    branches:
+      - main
+      - staging
+
+jobs:
+  lint:
+    name: Lint HTML, CSS e JavaScript
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      - name: Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Instalar dependências de qualidade
+        run: npm ci
+
+      - name: Lint HTML (HTMLHint)
+        run: npm run lint:html
+
+      - name: Lint CSS (Stylelint)
+        run: npm run lint:css
+
+      - name: Lint JavaScript (ESLint)
+        run: npm run lint:js
+
+  check-links:
+    name: Verificação de Links Internos
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      - name: Verificar links internos
+        run: |
+          echo "Verificando referências internas entre páginas..."
+          BROKEN=0
+          for file in *.html; do
+            echo "Checando: $file"
+            # Extrai hrefs e srcs que referenciam arquivos locais
+            grep -oP '(?:href|src)="([^"#http][^"]*)"' "$file" | grep -oP '"[^"]*"' | tr -d '"' | while read -r ref; do
+              if [ ! -f "$ref" ] && [ ! -d "$ref" ]; then
+                echo "ERRO: Referência quebrada '$ref' em $file"
+                BROKEN=$((BROKEN + 1))
+              fi
+            done
+          done
+          if [ $BROKEN -gt 0 ]; then
+            echo "Encontrados $BROKEN link(s) quebrado(s)."
+            exit 1
+          fi
+          echo "Todos os links internos estão íntegros."
+
+  check-secrets:
+    name: Verificação de Segredos Expostos
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      - name: Verificar segredos expostos
+        run: |
+          echo "Verificando possíveis segredos expostos..."
+          FOUND=0
+          # Padrões comuns de chaves e tokens
+          PATTERNS=(
+            "api[_-]?key\s*=\s*['\"][^'\"]{10,}"
+            "secret\s*=\s*['\"][^'\"]{10,}"
+            "password\s*=\s*['\"][^'\"]{6,}"
+            "token\s*=\s*['\"][^'\"]{10,}"
+            "ghp_[A-Za-z0-9]{36}"
+            "-----BEGIN (RSA|EC|DSA|OPENSSH) PRIVATE KEY-----"
+          )
+          for pattern in "${PATTERNS[@]}"; do
+            if grep -rniP "$pattern" --include="*.js" --include="*.html" --include="*.css" .; then
+              echo "ALERTA: Possível segredo encontrado com padrão: $pattern"
+              FOUND=$((FOUND + 1))
+            fi
+          done
+          if [ $FOUND -gt 0 ]; then
+            echo "Segredos potencialmente expostos detectados. Revisão necessária."
+            exit 1
+          fi
+          echo "Nenhum segredo exposto detectado."

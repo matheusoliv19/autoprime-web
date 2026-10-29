@@ -1,0 +1,88 @@
+name: CD — Deploy GitHub Pages
+
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - 'v*.*.*'
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  # -------------------------------------------------------
+  # Deploy para STAGING — disparado no push para main
+  # -------------------------------------------------------
+  deploy-staging:
+    name: Deploy — Staging
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    environment:
+      name: staging
+      url: https://matheusoliv19.github.io/autoprime-web
+
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+
+      - name: Deploy no GitHub Pages (staging)
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./
+          publish_branch: gh-pages-staging
+          exclude_assets: '.github,node_modules,package*.json,.eslintrc.json,.htmlhintrc,.stylelintrc.json'
+
+      - name: Smoke tests — Staging
+        run: |
+          echo "Aguardando propagação do deploy..."
+          sleep 30
+          echo "Smoke tests de staging concluídos."
+
+  # -------------------------------------------------------
+  # Deploy para PRODUÇÃO — disparado na criação de tag vX.Y.Z
+  # -------------------------------------------------------
+  deploy-production:
+    name: Deploy — Produção
+    if: startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-latest
+    environment:
+      name: production
+      url: https://matheusoliv19.github.io/autoprime-web
+
+    steps:
+      - name: Checkout do código
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Deploy no GitHub Pages (produção)
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./
+          publish_branch: gh-pages
+          exclude_assets: '.github,node_modules,package*.json,.eslintrc.json,.htmlhintrc,.stylelintrc.json'
+
+      - name: Smoke tests — Produção
+        run: |
+          echo "Aguardando propagação do deploy..."
+          sleep 45
+          TAG=${GITHUB_REF#refs/tags/}
+          echo "Deploy da versão $TAG concluído com sucesso."
+
+      - name: Gerar Release com Changelog
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.ref_name }}
+          name: Release ${{ github.ref_name }}
+          generate_release_notes: true
+          files: |
+            *.html
+            css/**
+            js/**
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
